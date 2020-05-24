@@ -46,7 +46,7 @@ export class DepartmentFormComponent implements OnInit {
     if (!department._id) {
       this.add(department);
     } else {
-      //this.updateDiretor(diretor);
+      this.update(department);
     }
   }
 
@@ -67,6 +67,26 @@ export class DepartmentFormComponent implements OnInit {
         }
       )
   }
+
+  update(department: Department) {
+    this.departmentService.update(department)
+      .subscribe(
+        (u) => {
+          this.snackBar.open(
+            'Departamento Atualizado com sucesso!!',
+            'Ok', {duration: 2000});
+            this.cancelar();
+            this.load();
+        },
+        (err) => {
+          console.error(err);
+          this.snackBar.open(
+            err.error.message, 'Ok', {duration: 2000});
+        }
+      )
+  }
+
+
 
   cancelar(): void {
     this.dialogRef.close();

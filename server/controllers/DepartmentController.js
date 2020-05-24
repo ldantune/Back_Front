@@ -22,7 +22,6 @@ module.exports = {
 
     delete: (req, res) => {
         let id = req.params.id;
-        console.log(id);
         DepartmentModel.deleteOne({_id: id}, (err) => {
             if(err) {
                 res.status(500).send(err);
@@ -34,7 +33,6 @@ module.exports = {
 
     update: (req, res) => {
         let id = req.params.id;
-        console.log(id);
         DepartmentModel.findById(id, (err, dep) => {
             if(err) {
                 res.status(500).send(err);

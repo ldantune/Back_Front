@@ -40,6 +40,10 @@ export class DepartmentService {
     return this.http.post<Department>(`${this.url}`, department);
   }
 
+  update(dep: Department): Observable<Department> {
+    return this.http.patch<Department>(`${this.url}/${dep._id}`, dep);
+  }
+
   del(dep: Department): Observable<any> {
     console.log(dep);
     return this.http.delete(`${this.url}/${dep._id}`);
