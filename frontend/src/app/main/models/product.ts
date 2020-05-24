@@ -1,5 +1,9 @@
+import { Department } from './department';
+
 export interface Product {
+    _id?: string;
     name: string;
-    department: string;
+    departments: Department[];
     price: number;
+    stock: number;
 }

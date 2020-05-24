@@ -18,14 +18,34 @@
     <button mat-icon-button routerLink="/main/people">
       <mat-icon>home</mat-icon>
     </button>
-    <button mat-icon-button routerLink="/main/products">
+
+    <button mat-icon-button [matMenuTriggerFor]="menuCadastros" aria-label="Example icon-button with a menu">
       <mat-icon>shop</mat-icon>
     </button>
+    <mat-menu #menuCadastros="matMenu">
+      <button mat-menu-item routerLink="/main/departments">
+        <mat-icon>shop</mat-icon>
+        Lista de Departamentos
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item routerLink="/main/products">
+        <mat-icon>shop</mat-icon>
+        Lista de Produtos
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item routerLink="/main/people">
+        <mat-icon>shop</mat-icon>
+        Lista de Pessoas
+      </button>
+    </mat-menu>
+
+
+    
 
     <button mat-icon-button (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
     </button>
-    
+    <!--  -->
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>account_circle</mat-icon>
     </button>
@@ -42,3 +62,5 @@
 
 
 <router-outlet></router-outlet>
+
+<!-- <app-footer></app-footer> -->
