@@ -18,5 +18,34 @@ module.exports = {
                 res.status(200).send(dep);
             }
         })
+    },
+
+    delete: (req, res) => {
+        let id = req.params.id;
+        console.log(id);
+        DepartmentModel.deleteOne({_id: id}, (err) => {
+            if(err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({});
+            }
+        });
+    },
+
+    update: (req, res) => {
+        let id = req.params.id;
+        console.log(id);
+        DepartmentModel.findById(id, (err, dep) => {
+            if(err) {
+                res.status(500).send(err);
+            } else if(!dep) {
+                res.status(404).send({});
+            } else {
+                dep.name = req.body.name;
+                dep.save()
+                    .then((d) => res.status(200).send(d))
+                    .catch((e) => res.status(500).send(e));
+            }
+        })
     }
 }

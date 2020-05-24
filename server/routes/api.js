@@ -6,7 +6,7 @@ const ProductController = require("../controllers/ProductController");
 const AuthController = require("../controllers/AuthController");
  
 
-router.use(AuthController.check_token);
+// router.use(AuthController.check_token);
 
 //Routes Pessoas
 router.get('/people', PersonController.all);
@@ -14,6 +14,8 @@ router.get('/people', PersonController.all);
 //Routes Departamentos
 router.get('/departments', DepartmentController.all);
 router.post('/departments', DepartmentController.add);
+router.delete('/departments/:id', DepartmentController.delete);
+router.patch('/departments/:id', DepartmentController.update);
 
 //Routes Products
 router.get('/products', ProductController.all);

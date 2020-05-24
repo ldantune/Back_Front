@@ -9,27 +9,39 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class DepartmentService {
   
-  readonly url = 'http://localhost:3000/api';
+  readonly url = 'http://localhost:3000/api/departments';
 
   private departmentsSubjects$: BehaviorSubject<Department[]> = new BehaviorSubject<Department[]>(null);
   private loaded: boolean = false;
 
   constructor(private http: HttpClient) { }
 
+  // getDepartment(): Observable<Department[]> {
+  //   if(!this.loaded) {
+  //     this.http.get<Department[]>(`${this.url}/departments`)
+  //     .pipe(tap((deps) => console.log(deps)))
+  //     .subscribe(this.departmentsSubjects$);
+  //     this.loaded = true;
+  //   }
+  //   return this.departmentsSubjects$.asObservable();
+  // }
+
   getDepartment(): Observable<Department[]> {
-    if(!this.loaded) {
-      this.http.get<Department[]>(`${this.url}/departments`)
-      .pipe(tap((deps) => console.log(deps)))
-      .subscribe(this.departmentsSubjects$);
-      this.loaded = true;
-    }
-    return this.departmentsSubjects$.asObservable();
+    return this.http.get<Department[]>(`${this.url}`)
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+          return throwError(e)
+        })
+      );
   }
 
   add(department: Department): Observable<Department> {
-    return this.http.post<Department>(`${this.url}/departments`, department)
-      .pipe(
-        tap((dep: Department) => this.departmentsSubjects$.getValue().push(dep))
-      )
+    return this.http.post<Department>(`${this.url}`, department);
+  }
+
+  del(dep: Department): Observable<any> {
+    console.log(dep);
+    return this.http.delete(`${this.url}/${dep._id}`);
   }
 }

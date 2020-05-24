@@ -58,6 +58,7 @@ export class DepartmentFormComponent implements OnInit {
             'Departamento Salvo com sucesso!!',
             'Ok', {duration: 2000});
             this.cancelar();
+            this.load();
         },
         (err) => {
           console.error(err);
@@ -69,6 +70,10 @@ export class DepartmentFormComponent implements OnInit {
 
   cancelar(): void {
     this.dialogRef.close();
+  }
+
+  load() {
+    location.reload()
   }
 
 }
