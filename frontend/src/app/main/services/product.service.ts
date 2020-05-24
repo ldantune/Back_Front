@@ -9,12 +9,12 @@ import { catchError } from 'rxjs/operators';
 })
 export class ProductService {
 
-  readonly url = 'http://localhost:3000/api';
+  readonly url = 'http://localhost:3000/api/products';
 
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.url}/products`)
+    return this.http.get<Product[]>(`${this.url}`)
       .pipe(
         catchError((e) => {
           console.log(e);

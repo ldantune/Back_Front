@@ -19,5 +19,8 @@ router.patch('/departments/:id', DepartmentController.update);
 
 //Routes Products
 router.get('/products', ProductController.all);
+router.post('/products', ProductController.add);
+router.delete('/products/:id', ProductController.delete);
+router.patch('/products/:id', ProductController.update);
 
 module.exports = router;
